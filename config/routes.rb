@@ -1,10 +1,16 @@
 TheVirtualLibrarySree::Application.routes.draw do
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
   end
   resources :users
+  root to: 'static_pages#home'
+  match '/signup',  to: 'users#new',            via: 'get'
+  match '/libraryguide',    to: 'static_pages#libraryguide',    via: 'get'
+  match '/aboutus',   to: 'static_pages#aboutus',   via: 'get'
+  match '/home', to: 'static_pages#home', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
