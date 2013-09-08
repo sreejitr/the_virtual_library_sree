@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
-  skip_before_filter :authorize, only: [:show, :edit, :update, :destroy]
+  #before_filter :authorize, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
-  def index
-    @users = User.all
-  end
+  #def index
+  #  @users = User.all
+  #end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -28,11 +29,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user }
+        sign_in @user
+        flash[:success] = "Welcome to the Virtual Library!"
+        redirect_to @user
       else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render 'new'
       end
     end
   end
@@ -41,12 +42,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      if @user.update_attributes(user_params)
+        flash[:success] = 'User was successfully updated.'
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render edit
       end
     end
   end
@@ -54,11 +54,9 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+    User.find(params[:id]).destroy
+    flash[:success] = "User destroyed."
+    redirect_to users_path
   end
 
   private
@@ -69,6 +67,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :address, :city, :state, :country, :zipcode, :useremail, :password, :aboutme, :interests)
+      params.require(:user).permit(:name, :address, :city, :state, :country, :zipcode, :useremail, :password, :password_confirmation, :aboutme, :interests)
     end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
 end

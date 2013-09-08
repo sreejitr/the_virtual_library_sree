@@ -1,15 +1,19 @@
 TheVirtualLibrarySree::Application.routes.draw do
 
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+  #controller :sessions do
+  #  get 'login' => :new
+  #  post 'login' => :create
+  #  delete 'logout' => :destroy
+  #end
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
   root to: 'static_pages#home'
-  match '/signup',  to: 'users#new',            via: 'get'
-  match '/libraryguide',    to: 'static_pages#libraryguide',    via: 'get'
-  match '/aboutus',   to: 'static_pages#aboutus',   via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/signup',  to: 'users#new', via: 'get'
+  match '/profile', to: 'users#show', via: 'get'
+  match '/libraryguide', to: 'static_pages#libraryguide', via: 'get'
+  match '/aboutus', to: 'static_pages#aboutus',   via: 'get'
   match '/home', to: 'static_pages#home', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.

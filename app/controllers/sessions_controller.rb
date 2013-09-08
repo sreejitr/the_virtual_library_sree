@@ -1,18 +1,24 @@
 class SessionsController < ApplicationController
   skip_before_filter :authorize
   def new
+  #  redirect_to home_path
   end
 
   def create
-    user = User.find_by(useremail: useremail)
-    if user and user.authenticate(params[:password])
-      session[:user_id] = user.id
+    #render new
+    user = User.find_by(useremail: params[:session][:useremail].downcase)
+    if user && user.authenticate(params[:session][:password])
+      #session[:user_id] = user.id
+      sign_in user
+      redirect_back_or user
     else
-      redirect_to login_url, alert: "Invalid email/password combination"
+      flash[:error] = 'Invalid email/password combination' # Not quite right!
+      render 'new'
     end
   end
 
   def destroy
-    session[:user_id] = nil
+    sign_out
+    redirect_to root_path
   end
 end

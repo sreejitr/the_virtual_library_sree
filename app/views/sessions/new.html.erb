@@ -1,25 +1,18 @@
-<div class="depot_form" >
-  <% if flash[:alert] %>
-      <p id="notice" ><%= flash[:alert] %></p>
-  <% end %>
+    <h1>Sign in</h1>
+    <div class="row">
+      <div class="span6 offset3">
+        <%= form_for(:session, url: sessions_path) do |f| %>
 
-  <%= form_tag do %>
-      <fieldset>
-        <legend>Please Log In</legend>
+            <%= f.label :useremail %>
+            <%= f.text_field :useremail %>
 
-        <div>
-          <label for="useremail" >Email address:</label>
-          <%= text_field_tag :useremail, params[:useremail] %>
-        </div>
+            <%= f.label :password %>
+            <%= f.password_field :password %>
 
-        <div>
-          <label for="password" >Password:</label>
-          <%= password_field_tag :password, params[:password] %>
-        </div>
 
-        <div>
-          <%= submit_tag "Login" %>
-        </div>
-      </fieldset>
-  <% end %>
-</div>
+            <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+        <% end %>
+
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+      </div>
+    </div>

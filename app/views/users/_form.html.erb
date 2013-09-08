@@ -39,19 +39,25 @@
     <%= f.label :useremail %><br>
     <%= f.text_field :useremail %>
   </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
+    <div class="field">
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+     </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
+
   <div class="field">
     <%= f.label :aboutme %><br>
-    <%= f.text_field :aboutme %>
+    <%= f.text_field :aboutme%>
   </div>
   <div class="field">
-    <%= f.label :interests %><br>
-    <%= f.text_field :interests %>
+    <%= f.label :Interests %><br>
+    <%= f.text_field :interests%>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

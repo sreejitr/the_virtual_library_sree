@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
 
 <p>
   <strong>Address:</strong>
@@ -33,11 +38,6 @@
 <p>
   <strong>Useremail:</strong>
   <%= @user.useremail %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
 </p>
 
 <p>
