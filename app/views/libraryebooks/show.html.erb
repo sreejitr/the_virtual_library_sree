@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @libraryebook.name %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @libraryebook.author %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @libraryebook.genre %>
+</p>
+
+<p>
+  <strong>Abstract:</strong>
+  <%= @libraryebook.abstract %>
+</p>
+
+<p>
+  <strong>Loanamount:</strong>
+  <%= @libraryebook.loanamount %>
+</p>
+
+<p><%= link_to 'Loan Ebook', relationshps_path %></p>
+<p><%#= link_to(@libraryebook, class: "btn btn-small") do Loan %> <%#i class="icon-edit icon-white"></i>  %>
+  <%# end %> </p>
+
+</br>
+
+<p><%= link_to 'Edit', edit_libraryebook_path(@libraryebook) %> |
+<%= link_to 'Back', ebooks_path %></p>

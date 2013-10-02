@@ -10,9 +10,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       #session[:user_id] = user.id
       sign_in user
-      redirect_back_or user
+      redirect_to profile_path
     else
-      flash[:error] = 'Invalid email/password combination' # Not quite right!
+      flash[:error] = 'Invalid email/password combination'
       render 'new'
     end
   end

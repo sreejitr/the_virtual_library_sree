@@ -1,0 +1,20 @@
+<%= link_to 'Back', ebooks_path %>
+<%= link_to 'Show', @relationshp %> |
+
+<%= form_for(@relationshp) do |f| %>
+    <% if @relationshp.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@relationshp.errors.count, "error") %> prohibited this relationship from being saved:</h2>
+
+          <ul>
+            <% @relationshp.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

@@ -1,54 +1,53 @@
 class UsersController < ApplicationController
   #before_filter :authorize, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
   #def index
   #  @users = User.all
   #end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = current_user #User.find(params[:id])
+    @relationshps = @user.relationshps.paginate(page: params[:page])
+    respond_to do |format|
+      format.html
+      format.json { render json: @user}
+      format.xml {render xml: @user}
+    end
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
     @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        sign_in @user
-        flash[:success] = "Welcome to the Virtual Library!"
-        redirect_to @user
-      else
-        render 'new'
-      end
+    if  @user.save
+      sign_in(@user)
+      flash[:success] = "Welcome to the Virtual Library!"
+      redirect_to @user
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
       if @user.update_attributes(user_params)
         flash[:success] = 'User was successfully updated.'
         format.json { head :no_content }
+        sign_in(@user)
+        redirect_to @user
       else
-        render edit
+        render 'edit'
       end
-    end
   end
 
   # DELETE /users/1
@@ -60,12 +59,11 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :address, :city, :state, :country, :zipcode, :useremail, :password, :password_confirmation, :aboutme, :interests)
     end
@@ -74,4 +72,5 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
+
 end

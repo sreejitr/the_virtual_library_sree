@@ -1,13 +1,11 @@
 TheVirtualLibrarySree::Application.routes.draw do
 
-  #controller :sessions do
-  #  get 'login' => :new
-  #  post 'login' => :create
-  #  delete 'logout' => :destroy
-  #end
+  resources :libraryebooks
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :relationshps, only: [:create, :show, :destroy]
   root to: 'static_pages#home'
+  match '/ebooks', to: 'libraryebooks#index', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/signup',  to: 'users#new', via: 'get'
@@ -15,6 +13,11 @@ TheVirtualLibrarySree::Application.routes.draw do
   match '/libraryguide', to: 'static_pages#libraryguide', via: 'get'
   match '/aboutus', to: 'static_pages#aboutus',   via: 'get'
   match '/home', to: 'static_pages#home', via: 'get'
+  match '/libraryebooks/:id/loan', to: 'relationshps#create', via: 'get'
+  match '/libraryebooks/:id/loan', to: 'relationshps#create', via: 'post'
+  match '/relationshps', to: 'relationshps#create', via: 'get'
+  match '/relationshps', to: 'relationshps#create', via: 'post'
+  match '/openbook', to: 'relationshps#show', via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -44,10 +47,10 @@ TheVirtualLibrarySree::Application.routes.draw do
   #   end
 
   # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
+     resources :libraryebooks do
+       resources :relationshps
   #     resource :seller
-  #   end
+     end
 
   # Example resource route with more complex sub-resources:
   #   resources :products do

@@ -11,7 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130908181423) do
+ActiveRecord::Schema.define(version: 20130908195848) do
+
+  create_table "ebooks", force: true do |t|
+    t.string   "name"
+    t.string   "author"
+    t.string   "abstract"
+    t.float    "loanamount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "libraryebooks", force: true do |t|
+    t.string   "name"
+    t.string   "author"
+    t.string   "genre"
+    t.string   "abstract"
+    t.float    "loanamount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "relationshps", force: true do |t|
+    t.integer  "libraryebook_id"
+    t.integer  "user_id"
+    t.string   "status"
+    t.date     "loanstart"
+    t.date     "loanend"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationshps", ["user_id"], name: "index_relationshps_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -30,8 +61,5 @@ ActiveRecord::Schema.define(version: 20130908181423) do
     t.string   "password_digest"
     t.string   "remember_token"
   end
-
-  add_index "users", ["useremail"], name: "index_users_on_useremail", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

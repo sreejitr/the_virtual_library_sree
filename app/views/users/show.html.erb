@@ -1,3 +1,11 @@
+<br />
+<br />
+
+<br />
+<p>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>  </p>
+
 <p id="notice"><%= notice %></p>
 
 <div class="row">
@@ -50,5 +58,21 @@
   <%= @user.interests %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+  <br />
+  <br />
+
+  <div class = "span8">
+    <% if @user.relationshps.any? %>
+
+        <h3> Books Loaned (<%= @user.relationshps.count %>) </h3>
+        <ol class="relationshps">
+          <%= render @relationshps %>
+        </ol>
+        <%= will_paginate @relationshps %>
+
+
+
+        <% end %>
+
+     </div>

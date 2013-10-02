@@ -1,6 +1,10 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,4 +24,6 @@ module TheVirtualLibrarySree
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
   end
+
+
 end

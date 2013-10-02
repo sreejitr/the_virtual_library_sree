@@ -1,0 +1,25 @@
+<html>
+
+<head>
+
+<p><%= link_to 'Back', profile_path %>  </p>
+  <%= javascript_include_tag "prototype" %>
+
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= Libraryebook.find(@relationshp.libraryebook_id).name %>
+      </h1>
+      <p>By <%= Libraryebook.find(@relationshp.libraryebook_id).author %></p>
+    </section>
+  </aside>
+</div>
+</head>
+
+</html>
+
+
+

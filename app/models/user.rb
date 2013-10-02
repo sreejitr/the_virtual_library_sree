@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :relationshps, dependent: :destroy
   before_save { self.useremail = useremail.downcase }
   before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
@@ -6,6 +7,7 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :useremail, presence: true, uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX }
   has_secure_password
+  validates :password, length: { minimum: 6 }
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

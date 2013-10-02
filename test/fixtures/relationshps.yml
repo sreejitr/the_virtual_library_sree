@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  libraryebook_id: 1
+  user_id: 1
+  status: MyString
+  loanstart: 2013-09-08
+  loanend: 2013-09-08
+
+two:
+  libraryebook_id: 1
+  user_id: 1
+  status: MyString
+  loanstart: 2013-09-08
+  loanend: 2013-09-08

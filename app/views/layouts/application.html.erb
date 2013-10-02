@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The Virtual Library</title>
+  <title> The Virtual Library</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
 </head>
 <body>
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "The Virtual Library", 'http://localhost:3000', id: "logo" %>
-      <nav>
-        <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "About us", aboutus_path  %></li>
-          <% if signed_in? %>
+
+        <%= link_to "The Virtual Library", 'earth_wallpaper_desktop-normal5.4.jpg', id: "logo" %>
+
+    <nav>
+      <ul class="nav pull-right">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "About us", aboutus_path  %></li>
+        <li><%= link_to "Library Guide", libraryguide_path  %></li>
+        <% if signed_in? %>
             <li><%= link_to "Profile", current_user %> </li>
             <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-          <% else %>
-              <li><%= link_to "Sign In", signin_path %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </div>
+            <li><%= link_to "Library", ebooks_path %></li>
+        <% else %>
+            <li><%= link_to "Sign In", signin_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
   </div>
 </header>
-<div class="container">
 
+<div class = “container”
 <%= yield %>
-
+</div>
 </body>
 </html>

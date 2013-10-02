@@ -14,11 +14,17 @@
     <% end %>
 
     <fieldset>
-
+     <p>
       <div class="field">
         <%= f.label :name %><br />
         <%= f.text_field :name %>
       </div>
+
+      <div class="field">
+        <%= f.label :password, 'Password' %><br />
+        <%= f.password_field :password %>
+      </div>
+
       <div class="field">
         <%= f.label :password, 'Password' %><br />
         <%= f.password_field :password %>
@@ -32,6 +38,6 @@
       <div class="actions">
         <%= f.submit %>
       </div>
-
+      </p>
     </fieldset>
 <% end %>
