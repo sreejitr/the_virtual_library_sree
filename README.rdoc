@@ -1,6 +1,7 @@
 == README
 
-
+The website allows users to create an account, and loan ebooks. Once an ebook is loaned the details of the ebook 
+appears on the user's profile page.
 
 * Ruby version: 2.0.0
 
